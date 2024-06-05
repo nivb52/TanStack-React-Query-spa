@@ -18,14 +18,16 @@ export function UserProfile() {
   const patchUser = usePatchUser();
   const navigate = useNavigate();
 
-  const optimisticUserMutationData = useMutationState({
+  /** @description: optimistic Mutation Data */
+  const pendingData = useMutationState({
     filters: { mutationKey: [PATCH_USER_MUTATION_KEY], status: 'pending' },
     select(mutation) {
-      return mutation.state.variables;
+      return mutation.state.variables as User;
     }
   });
 
-  const pendingUser = optimisticUserMutationData ? (optimisticUserMutationData[0] as User) : null;
+  /** @note the usage of pendingData[0] is since we know ther ewill be only 1 */
+  const pendingUser = pendingData ? pendingData[0] : null;
 
   useEffect(() => {
     // use login data for redirect, for base app that doesn't
