@@ -12,11 +12,11 @@ test('filter staff', async () => {
     wrapper: createQueryClientWrapper()
   });
 
-  await waitFor(() => expect(result.current.staff.length).toBe(mockStaff.length));
+  await waitFor(() => expect(result.current.staff).toHaveLength(mockStaff.length));
 
   const someTreatment = mockStaff[0].treatmentNames[0];
   act(() => result.current.setFilter(someTreatment));
   const actualStaffPerTreatment = filterByTreatment(mockStaff, someTreatment).length;
 
-  await waitFor(() => expect(result.current.staff.length).toBe(actualStaffPerTreatment));
+  await waitFor(() => expect(result.current.staff).toHaveLength(actualStaffPerTreatment));
 });
