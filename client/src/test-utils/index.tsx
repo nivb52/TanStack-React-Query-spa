@@ -8,12 +8,13 @@ import { queryClientOptions } from '@/react-query/queryClient';
 
 // ** FOR TESTING CUSTOM HOOKS ** //
 // from https://tkdodo.eu/blog/testing-react-query#for-custom-hooks
-// export const createQueryClientWrapper = () => {
-//   const queryClient = generateQueryClient();
-//   return ({ children }: PropsWithChildren) => (
-//     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-//   );
-// };
+// Determenistic test - each test will have his own queryClient this is the reason we creating new queryClient
+export const createQueryClientWrapper = () => {
+  const queryClient = generateQueryClient();
+  return ({ children }: PropsWithChildren) => (
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  );
+};
 
 //  make a function to generate unique query client for each test
 const generateQueryClient = () => {
